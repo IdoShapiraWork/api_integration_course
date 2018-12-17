@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_093215) do
+ActiveRecord::Schema.define(version: 2018_12_17_103835) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_093215) do
     t.integer "verified"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email_playground"
   end
 
 end
