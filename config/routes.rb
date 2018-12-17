@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   post '/login' => 'login#login'
 
   get '/api_admin' => 'api_admin#api_admin'
+  get '/api_user' => 'api_user#user_requests'
 
-  get 'api_admin/api_admin'
-  get 'api_user/user_requests'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

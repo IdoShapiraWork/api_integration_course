@@ -71,7 +71,9 @@ class LoginController < ApplicationController
       begin
         response = RestClient.get("localhost:8086/playground/users/login/#{params[:playground]}/#{params[:email]}")
         if response.code == 200
-          redirect_to('/api_admin')
+          session[:user] = params[:email]
+          session[:playground] = params[:playground]
+          @user.role == 'Manager'? (redirect_to('/api_admin')):(redirect_to('/api_user'))
         end
       rescue RestClient::ExceptionWithResponse => e
         @message = "Error occured #{JSON.parse(e.response)['message']}"
@@ -84,12 +86,12 @@ class LoginController < ApplicationController
   def validate_user_on_server
     # make sure that the local db matches the data on the server db
     begin
-      response = RestClient.get("localhost:8086/playground/users/login/#{params[:playground]}/#{params[:user]}")
+      response = RestClient.get("localhost:8086/playground/users/login/#{params[:playground]}/#{params[:email]}")
       server_user = JSON.parse(response.body)
       # update the local db
       @user.update(server_user)
     rescue StandardError => e
-      @message =  "Error occured user does not exist with the inserted email and playground"
+      @message =  "Error occured #{e.message}"
       false
     end
   end
