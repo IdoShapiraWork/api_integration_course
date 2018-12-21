@@ -1,10 +1,36 @@
-<title>
+<head> <h1> Manager Actions:</h1></head>
+<h1> Tools index </h1>
 
-</title>
+<h6> Welcome <%= @user.username %></h6>
+
+
 <body>
-<h1>ApiAdmin#api_admin</h1>
-<p>Find me in app/views/api_admin/api_admin.html.erb</p>
-  Welcome <%= @user.username %>
+
+
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-view-all-elements-list" data-toggle="list" href="#list-view-all-elements" role="tab" aria-controls="view-all-elements">View All Elements</a>
+      <a class="list-group-item list-group-item-action" id="list-create-element-list" data-toggle="list" href="#list-create-element" role="tab" aria-controls="create-element">Create An Element</a>
+
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-view-all-elements"  role="tabpanel" aria-labelledby="list-view-all-elements-list">
+
+      </div>
+      <div class="tab-pane fade" id="list-create-element" role="tabpanel" aria-labelledby="list-create-element-list">
+        <%= render partial: 'create_element' %>
+      </div>
+
+
+  </div>
+
+</div>
+
+</div>
+
 </body>
 
 

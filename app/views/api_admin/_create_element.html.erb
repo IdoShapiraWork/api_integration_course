@@ -1,0 +1,14 @@
+
+<%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'create_form'}   ) do %>
+  <p><%= text_field_tag 'name',nil,placeholder: 'Insert Element Name', size:30,:required => true %></p>
+  <p> <%= select( 'type',[1,2],['Board','Type1']) %></p>
+  <p>Location X: <%= number_field_tag 'location_x'%></p>
+  <p>Location Y: <%= number_field_tag 'location_y'%></p>
+  <%= form_for(:api_admin,url: '') %>
+  <%= radio_button_tag 'role', 'Manager'%>
+  <%= label_tag 'Manager' %>
+  <%= radio_button_tag 'role', 'Player',true %>
+  <%= label_tag 'Player' %>
+  <%= hidden_field_tag(:request_type,'create_user') %>
+  <p> <%= button_tag 'Submit Create'%></p>
+<% end %>

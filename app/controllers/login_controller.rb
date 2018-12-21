@@ -37,7 +37,7 @@ class LoginController < ApplicationController
                                    "role": params[:role]
                                }.to_json,content_type: :json, accept: :json)
       userTo = JSON.parse(response.body)
-      puts response.body
+
       @user = User.create(email:userTo['email'],
                           playground: userTo['playground'],
                           username: userTo['username'],
@@ -50,6 +50,7 @@ class LoginController < ApplicationController
       @message = "Error occured #{e.message}"
     end
   end
+
 
   def confirm_user
     # confirm the user and update the databases
@@ -89,7 +90,15 @@ class LoginController < ApplicationController
       response = RestClient.get("localhost:8086/playground/users/login/#{params[:playground]}/#{params[:email]}")
       server_user = JSON.parse(response.body)
       # update the local db
-      @user.update(server_user)
+      if @user.nil? # add user to client db if data is missing on the client
+        @user = User.create(email:server_user['email'],
+                            playground: server_user['playground'],
+                            username: server_user['username'],
+                            avatar: server_user['avatar'], verified: 1,
+                            points: server_user['points'], role: server_user['role'])
+      else
+        @user.update(server_user)
+      end
     rescue StandardError => e
       @message =  "Error occured #{e.message}"
       false

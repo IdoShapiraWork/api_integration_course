@@ -1,0 +1,6 @@
+<%= form_for( :login,url:'/login',remote:true  ) do %>
+  <p><%= text_field_tag 'email',nil,placeholder: 'Insert email', size:50,:required => true %></p>
+  <p><%= text_field_tag 'code_validation',nil,placeholder: 'Insert validation code', size:50,:required => true %></p>
+  <%= hidden_field_tag(:request_type,'confirm_user') %>
+  <p> <%= button_tag 'Submit Confirm'%></p>
+<% end %>
