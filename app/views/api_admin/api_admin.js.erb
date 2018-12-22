@@ -6,9 +6,36 @@ function get_data(){
     // Remove message after 3 seconds
     setInterval(function() {
         divContainer.innerHTML="";
-    }, 5 * 1000);
+    }, 10* 1000);
+}
+
+function insert_data_to_element_edit(){
+    var divContainer = document.getElementById("element_id");
+    if(divContainer.value != ''){
+        divContainer = document.getElementById("name_element_edit");
+        divContainer.value = "<%= @element_edit['name'] %>";
+        divContainer = document.getElementById("element_location_x_edit");
+        divContainer.value = "<%= @element_edit['x'] %>";
+        divContainer = document.getElementById("element_location_y_edit");
+        divContainer.value = "<%= @element_edit['y'] %>";
+        divContainer = document.getElementById("element_attributes_edit");
+        divContainer.value = "<%= (@element_edit['attributes_print']) %>";
+        divContainer = document.getElementById("element_create_date_edit");
+        divContainer.value = "<%= @element_edit['creationDate'] %>";
+        divContainer = document.getElementById("type_element_edit");
+        divContainer.value = "<%= @element_edit['type'] %>";
+        divContainer = document.getElementById("element_expiration_date_edit");
+        <% unless @element_edit['expirationDate'].nil? %>
+        divContainer.value = "<%= Date.strptime(@element_edit['expirationDate'],'%Y-%m-%d')%>";
+        <%end%>
+
+
+
+    }
+
 
 }
+insert_data_to_element_edit();
 get_data();
 
 

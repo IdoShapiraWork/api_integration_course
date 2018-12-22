@@ -1,7 +1,7 @@
 <h4> Insert only details that you would like to change</h4>
 <%= form_for(:api_admin ,url:'/api_admin', html: {class: 'edit_user'}, remote:true  ) do %>
-  <p><%= text_field_tag 'email',nil,placeholder:   @user.email, size:50,disabled: true %></p>
-  <p><%= text_field_tag 'points',nil,placeholder: "Points: #{@user.points}", size:50,disabled: true %></p>
+  <p><%= text_field_tag 'email',nil,placeholder:   "Email: #{@user.email} Read Only", size:50,disabled: true %></p>
+  <p><%= text_field_tag 'points',nil,placeholder: "Points: #{@user.points} Read Only", size:50,disabled: true %></p>
   <p><%= text_field_tag 'user_name',nil,placeholder: "username: #{@user.username}", size:50,:required => true %></p>
   <p><%= text_field_tag 'avatar',nil,placeholder: "avatar: #{@user.avatar}", size:50,:required => true %></p>
   <p>

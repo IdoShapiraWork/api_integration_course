@@ -6,21 +6,46 @@ class ApiAdminController < ApplicationController
     @user = User.find_by_email(session[:user])
     #redirect_to '/api_user' if @user.role == 'Player' # activate after I create the same edit user in player section
     @elements = get_all_elements
+    @element_edit = {}
     unless params[:request_type].blank?
-
       case params[:request_type]
-
       when 'edit_user'
         edit_user
-
-      when 'create_element'
-        create_element
+      when 'element_action'
+        element_actions
       end
-
     end
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+
+  def element_actions
+    #Get,Edit and Create element
+    case params[:commit]
+    when 'Get Element Data'
+      get_element
+    when 'Edit Element'
+    when 'Create Element'
+      create_element
+    end
+
+  end
+
+  def get_element
+    begin
+      response = RestClient.get("localhost:8086/elementEntities/#{@user.playground}&#{params[:element_id]}")
+      @element_edit = JSON.parse(response.body)
+      @element_edit['attributes_print'] = ''
+       @element_edit['attributes'].each do |h,v|
+         @element_edit['attributes_print'] << "#{h}:#{v}"
+      end
+    rescue RestClient::ExceptionWithResponse => e
+      @message = "Error occured: Element not found"
+    rescue StandardError => e
+      @message =  "Error occured #{e}"
     end
   end
 
@@ -47,7 +72,6 @@ class ApiAdminController < ApplicationController
 
   def edit_user
     begin
-
       response = RestClient.put("localhost:8086/playground/users/#{@user.playground}/#{@user.email}",{
           "email": @user.email,
           "playground": @user.playground,
@@ -69,7 +93,6 @@ class ApiAdminController < ApplicationController
     end
   end
 
-
   def create_element
     @user = User.find_by_email(session[:user])
     attributes = {}
@@ -88,7 +111,8 @@ class ApiAdminController < ApplicationController
                                    "location": location,
                                    "attributes": attributes,
                                    "name": params[:name],
-                                   "type": params[:type]
+                                   "type": params[:type],
+                                   "expirationDate": params[:expiration_date]
                                }.to_json,content_type: :json, accept: :json)
 
       if response.code == 200
