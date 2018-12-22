@@ -97,7 +97,7 @@ class LoginController < ApplicationController
                             avatar: server_user['avatar'], verified: 1,
                             points: server_user['points'], role: server_user['role'])
       else
-        @user.update(server_user)
+        @user.update(server_user['avatar'], server_user['role'], server_user['username'], server_user['points'])
       end
     rescue StandardError => e
       @message =  "Error occured #{e.message}"

@@ -4,8 +4,6 @@
   <p>Location X: <%= number_field_tag 'location_x'%></p>
   <p>Location Y: <%= number_field_tag 'location_y'%></p>
   <p>Add attributes <%= text_field_tag 'attributes',nil,placeholder: "name:data, name:data",size:40 %></p>
-  need to find solution
-
   <p>Expiration Date: <%= date_field_tag 'expiration_date' %></p>
   <%= hidden_field_tag(:request_type,'create_element') %>
   <p> <%= button_tag 'Create Element'%></p>

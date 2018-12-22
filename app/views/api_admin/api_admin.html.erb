@@ -4,6 +4,7 @@
 <h6> Welcome <%= @user.username %></h6>
 
 
+
 <body>
 
 
@@ -12,21 +13,28 @@
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action active" id="list-create-element-list" data-toggle="list" href="#list-create-element" role="tab" aria-controls="create-element">Create An Element</a>
       <a class="list-group-item list-group-item-action" id="list-view-all-elements-list" data-toggle="list" href="#list-view-all-elements" role="tab" aria-controls="view-all-elements">View All Elements</a>
+      <a class="list-group-item list-group-item-action" id="list-edit-user-list" data-toggle="list" href="#list-edit-user" role="tab" aria-controls="edit-user">Edit User Details</a>
+
     </div>
   </div>
   <div class="col-8">
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="list-create-element"  role="tabpanel" aria-labelledby="list-create-element-list">
         <%= render partial: 'create_element' %>
-
       </div>
       <div class="tab-pane fade" id="list-view-all-elements" role="tabpanel" aria-labelledby="list-view-all-elements-list">
-        <% @elements.each do |element| %>
-       <p> <%="ID :#{element['id']}" %></p>
-
-        <% end %>
+        <div id="listingTable"></div>
+        <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+        <a href="javascript:nextPage()" id="btn_next">Next</a>
+        <br><br>
+        page: <span id="page"></span>
       </div>
-  </div>
+
+      <div class="tab-pane fade" id="list-edit-user" role="tabpanel" aria-labelledby="list-edit-user-list">
+        <%= render partial: 'edit_user' %>
+      </div>
+
+      </div>
 
 
     <p><div id="showResults"></div></p>
@@ -38,4 +46,71 @@
 
 </body>
 
+
+
+<script>
+    var current_page = 1;
+    var records_per_page = 5;
+    var objJson = <%= @elements.html_safe %>; // get elements from api
+
+
+    function prevPage()
+    {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
+    }
+
+    function nextPage()
+    {
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    }
+
+    function changePage(page)
+    {
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("listingTable");
+        var page_span = document.getElementById("page");
+
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+
+        listing_table.innerHTML = "";
+
+        for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < objJson.length; i++) {
+
+            listing_table.innerHTML +="<b>Id:</b> "+ objJson[i].id+ " <b>Name:</b> "+objJson[i].name+" <b>Type:</b> "+ objJson[i].type +"<b>Location X:</b> "+ objJson[i].location.x+" <b>Location Y:</b> "+objJson[i].location.y;
+            listing_table.innerHTML+=" <b>Attributes:</b> "+ JSON.stringify(objJson[i].attributes)+"<br><br>";
+
+        }
+        page_span.innerHTML = page + "/" + numPages();
+
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+
+    function numPages()
+    {
+        return Math.ceil(objJson.length / records_per_page);
+    }
+
+    window.onload = function() {
+        changePage(1);
+    };
+</script>
 
