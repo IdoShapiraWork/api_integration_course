@@ -1,0 +1,4 @@
+<%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'edit_form'}   ) do %>
+  <%= hidden_field_tag(:request_type,'element_action') %>
+  <p><%= text_field_tag 'element_attribute',nil,placeholder: 'Insert Element Type', size:20,:required => true %> <%= submit_tag 'Get All Element By Attribute'%></p>
+<% end %>

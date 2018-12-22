@@ -1,11 +1,12 @@
 <%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'edit_form'}   ) do %>
   <p><%= number_field_tag 'element_id',nil,placeholder: 'Insert Element ID', size:10,:required => true %> <%= submit_tag 'Get Element Data'%></p>
   <p><%= text_field_tag 'name_element_edit',nil,placeholder: 'Insert Element Name', size:30 %></p>
-  <p>Element Type: <%= text_field_tag 'type_element_edit',nil ,disabled:true %></p>
+  <p>Element Type: <%= text_field_tag 'type_element_edit',nil,disabled:true  %></p>
   <p>Location X: <%= number_field_tag 'element_location_x_edit'%></p>
   <p>Location Y: <%= number_field_tag 'element_location_y_edit'%></p>
   <p>Add attributes <%= text_field_tag 'element_attributes_edit',nil,placeholder: "name:data, name:data",size:40 %></p>
-  <p>Creation Date: <%= text_field_tag 'element_create_date_edit',nil ,size:40, disabled:true %></p>
+  <p>Creation Date: <%= text_field_tag 'element_create_date_edit' , nil, size:40, disabled:true %></p>
+  <p>Creator Email: <%= text_field_tag 'element_create_email_edit' , nil, size:40, disabled:true %></p>
   <p>Expiration Date: <%= date_field_tag 'element_expiration_date_edit' %></p>
   <%= hidden_field_tag(:request_type,'element_action') %>
   <p> <%= submit_tag 'Edit Element'%></p>

@@ -9,6 +9,16 @@ function get_data(){
     }, 10* 1000);
 }
 
+function get_attributes_elements_data(){
+    var divContainer = document.getElementById("showElementsByAttr")
+    divContainer.innerHTML="";
+    <% @attr_elements.each do |hash| %>
+    divContainer.innerHTML +="<%="Id: #{hash['id']} Name: #{hash['name']} Type: #{hash['type']} X: #{hash['location']['x']} Y: #{hash['location']['y']} "%>";
+    divContainer.innerHTML +="<%="Attributes: #{hash['attributes']} Creator: #{hash['creatorEmail']}"%><br><br>";
+    <%end %>
+
+}
+
 function insert_data_to_element_edit(){
     var divContainer = document.getElementById("element_id");
     if(divContainer.value != ''){
@@ -25,9 +35,13 @@ function insert_data_to_element_edit(){
         divContainer = document.getElementById("type_element_edit");
         divContainer.value = "<%= @element_edit['type'] %>";
         divContainer = document.getElementById("element_expiration_date_edit");
-        <% unless @element_edit['expirationDate'].nil? %>
+        <% if !@element_edit['expirationDate'].nil? %>
         divContainer.value = "<%= Date.strptime(@element_edit['expirationDate'],'%Y-%m-%d')%>";
+        <% else %>
+        divContainer.value = "dd/mm/yyyy"
         <%end%>
+        divContainer = document.getElementById("element_create_email_edit");
+        divContainer.value = "<%= @element_edit['creatorEmail'] %>"
 
 
 
@@ -36,6 +50,7 @@ function insert_data_to_element_edit(){
 
 }
 insert_data_to_element_edit();
+get_attributes_elements_data();
 get_data();
 
 
