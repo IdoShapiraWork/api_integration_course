@@ -11,6 +11,7 @@ class ApiAdminController < ApplicationController
     @elements = get_all_elements
     @element_edit = {}
     @attr_elements = []
+    @view_board_messages = []
     @location_elements = []
     unless params[:request_type].blank?
       case params[:request_type]
@@ -48,6 +49,10 @@ class ApiAdminController < ApplicationController
     case params[:commit]
     when 'Create Message'
       create_message
+    when 'Show Messages'
+      view_messages
+    when 'Update Attendance'
+      update_attendance
     end
   end
 

@@ -6,7 +6,7 @@ function getData(){
     // Remove message after 3 seconds
     setInterval(function() {
         divContainer.innerHTML="";
-    }, 6 * 1000);
+    }, 10 * 1000);
 }
 
 function getAttributesElementsData(){
@@ -26,7 +26,16 @@ function getLocationElementsData(){
     divContainer.innerHTML +="<%="Attributes: #{hash['attributes']} Creator: #{hash['creatorEmail']}"%><br><br>";
     <%end %>
 
+}function getActivityMessages(){
+    var divContainer = document.getElementById("showMessagesByElementId")
+    divContainer.innerHTML="";
+    <% @view_board_messages.each do |row| %>
+    divContainer.innerHTML +="<%= row %><br><br>";
+    <% end %>
+
+
 }
+
 
 function insertDataToElementEdit(){
     var divContainer = document.getElementById("element_id");
@@ -62,5 +71,5 @@ insertDataToElementEdit();
 getLocationElementsData();
 getAttributesElementsData();
 getData();
-
+getActivityMessages();
 

@@ -1,0 +1,10 @@
+<div class="tab-pane fade" id="list-update-attendance" role="tabpanel" aria-labelledby="list-update-attendance-list">
+  <h4> Insert an attendance board element id</h4>
+  <%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'view_messages'}   ) do %>
+    <p>Element ID: <%= number_field_tag 'element_id' ,nil,placeholder: 'Insert Element ID',required: true %></p>
+    <p>The number of students listed in the class: <%= number_field_tag 'students_listed' ,required: true %></p>
+    <p>The number of students that arrived to class: <%= number_field_tag 'students_arrived',required: true %></p>
+    <p><%= submit_tag 'Update Attendance'%></p>
+    <%= hidden_field_tag(:request_type,'activity_action') %>
+  <% end %>
+</div>
