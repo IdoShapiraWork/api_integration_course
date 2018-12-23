@@ -1,4 +1,4 @@
-function get_data(){
+function getData(){
     var divContainer = document.getElementById("showResults");
     divContainer.innerHTML="";
     divContainer.innerHTML ="<b><%= @message %></b>";
@@ -6,10 +6,10 @@ function get_data(){
     // Remove message after 3 seconds
     setInterval(function() {
         divContainer.innerHTML="";
-    }, 10* 1000);
+    }, 6 * 1000);
 }
 
-function get_attributes_elements_data(){
+function getAttributesElementsData(){
     var divContainer = document.getElementById("showElementsByAttr")
     divContainer.innerHTML="";
     <% @attr_elements.each do |hash| %>
@@ -18,8 +18,17 @@ function get_attributes_elements_data(){
     <%end %>
 
 }
+function getLocationElementsData(){
+    var divContainer = document.getElementById("showElementsByLocation")
+    divContainer.innerHTML="";
+    <% @location_elements.each do |hash| %>
+    divContainer.innerHTML +="<%="Id: #{hash['id']} Name: #{hash['name']} Type: #{hash['type']} X: #{hash['location']['x']} Y: #{hash['location']['y']} "%>";
+    divContainer.innerHTML +="<%="Attributes: #{hash['attributes']} Creator: #{hash['creatorEmail']}"%><br><br>";
+    <%end %>
 
-function insert_data_to_element_edit(){
+}
+
+function insertDataToElementEdit(){
     var divContainer = document.getElementById("element_id");
     if(divContainer.value != ''){
         divContainer = document.getElementById("name_element_edit");
@@ -49,8 +58,9 @@ function insert_data_to_element_edit(){
 
 
 }
-insert_data_to_element_edit();
-get_attributes_elements_data();
-get_data();
+insertDataToElementEdit();
+getLocationElementsData();
+getAttributesElementsData();
+getData();
 
 

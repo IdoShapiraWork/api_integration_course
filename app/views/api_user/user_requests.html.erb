@@ -1,2 +1,56 @@
-<h1>ApiUser#user_requests</h1>
-<p>Find me in app/views/api_user/user_requests.html.erb</p>
+<head> <h1> Player Actions:</h1></head>
+<h1> Tools index </h1>
+
+<h6> Welcome <%= @user.username %> Your points are: <%=@user.points %></h6>
+<br>
+
+<body>
+
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-create-element-list" data-toggle="list" href="#list-create-element" role="tab" aria-controls="create-element">Create An Element</a>
+      <a class="list-group-item list-group-item-action" id="list-view-all-elements-list" data-toggle="list" href="#list-view-all-elements" role="tab" aria-controls="view-all-elements">View All Elements</a>
+      <a class="list-group-item list-group-item-action" id="list-edit-user-list" data-toggle="list" href="#list-edit-user" role="tab" aria-controls="edit-user">Edit User Details</a>
+      <a class="list-group-item list-group-item-action" id="list-edit-element-list" data-toggle="list" href="#list-edit-element" role="tab" aria-controls="edit-element">Edit A Specific Element</a>
+      <a class="list-group-item list-group-item-action" id="list-get-element-by-attr-list" data-toggle="list" href="#list-get-element-by-attr" role="tab" aria-controls="get-element-by-attr">Get All Elements By Attribute</a>
+      <a class="list-group-item list-group-item-action" id="list-get-element-by-location-list" data-toggle="list" href="#list-get-element-by-location" role="tab" aria-controls="get-element-by-location">Get All Elements By Location</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-create-element"  role="tabpanel" aria-labelledby="list-create-element-list">
+      </div>
+      <div class="tab-pane fade" id="list-view-all-elements" role="tabpanel" aria-labelledby="list-view-all-elements-list">
+        <div id="listingTable"></div>
+        <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+        <a href="javascript:nextPage()" id="btn_next">Next</a>
+        <br><br>
+        page: <span id="page"></span>
+      </div>
+
+      <div class="tab-pane fade" id="list-edit-user" role="tabpanel" aria-labelledby="list-edit-user-list">
+      </div>
+
+      <div class="tab-pane fade" id="list-edit-element" role="tabpanel" aria-labelledby="list-edit-element-list">
+      </div>
+      <div class="tab-pane fade" id="list-get-element-by-attr" role="tabpanel" aria-labelledby="list-get-element-by-attr">
+        <p><div id="showElementsByAttr"></div></p>
+      </div>
+      <div class="tab-pane fade" id="list-get-element-by-location" role="tabpanel" aria-labelledby="list-get-element-by-location">
+
+        <p><div id="showElementsByLocation"></div></p>
+      </div>
+
+    </div>
+
+
+    <p><div id="showResults"></div></p>
+
+
+  </div>
+
+</div>
+
+
+</body>

@@ -1,3 +1,5 @@
+<div class="tab-pane fade" id="list-edit-element" role="tabpanel" aria-labelledby="list-edit-element-list">
+<h4> Edit an existing element</h4>
 <%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'edit_form'}   ) do %>
   <p><%= number_field_tag 'element_id',nil,placeholder: 'Insert Element ID', size:10,:required => true %> <%= submit_tag 'Get Element Data'%></p>
   <p><%= text_field_tag 'name_element_edit',nil,placeholder: 'Insert Element Name', size:30 %></p>
@@ -11,3 +13,4 @@
   <%= hidden_field_tag(:request_type,'element_action') %>
   <p> <%= submit_tag 'Edit Element'%></p>
 <% end %>
+</div>

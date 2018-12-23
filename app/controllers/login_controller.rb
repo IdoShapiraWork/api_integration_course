@@ -37,7 +37,6 @@ class LoginController < ApplicationController
                                    "role": params[:role]
                                }.to_json,content_type: :json, accept: :json)
       userTo = JSON.parse(response.body)
-
       @user = User.create(email:userTo['email'],
                           playground: userTo['playground'],
                           username: userTo['username'],
@@ -74,7 +73,7 @@ class LoginController < ApplicationController
         if response.code == 200
           session[:user] = params[:email]
           session[:playground] = params[:playground]
-          @user.role == 'Manager'? (redirect_to('/api_admin')):(redirect_to('/api_user'))
+          redirect_to :api_admin
         end
       rescue RestClient::ExceptionWithResponse => e
         @message = "Error occured #{JSON.parse(e.response)['message']}"

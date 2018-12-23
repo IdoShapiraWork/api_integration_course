@@ -1,0 +1,3 @@
+module Activity
+
+end

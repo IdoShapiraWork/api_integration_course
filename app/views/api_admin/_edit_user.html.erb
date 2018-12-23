@@ -1,3 +1,4 @@
+<div class="tab-pane fade show active" id="list-edit-user" role="tabpanel" aria-labelledby="list-edit-user-list">
 <h4> Insert only details that you would like to change</h4>
 <%= form_for(:api_admin ,url:'/api_admin', html: {class: 'edit_user'}, remote:true  ) do %>
   <p><%= text_field_tag 'email',nil,placeholder:   "Email: #{@user.email} Read Only", size:50,disabled: true %></p>
@@ -14,3 +15,4 @@
   <%= hidden_field_tag(:request_type,'edit_user') %>
   <p> <%= button_tag 'Submit Edit'%></p>
 <% end %>
+</div>

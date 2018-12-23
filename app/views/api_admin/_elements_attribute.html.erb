@@ -1,4 +1,15 @@
-<%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'edit_form'}   ) do %>
+<div class="tab-pane fade" id="list-get-element-by-attr" role="tabpanel" aria-labelledby="list-get-element-by-attr">
+<h4> Insert the name or the type of the element</h4>
+<%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'attribute_form'}   ) do %>
   <%= hidden_field_tag(:request_type,'element_action') %>
-  <p><%= text_field_tag 'element_attribute',nil,placeholder: 'Insert Element Type', size:20,:required => true %> <%= submit_tag 'Get All Element By Attribute'%></p>
+  <p><%= text_field_tag 'element_attribute',nil,placeholder: 'Insert value', size:20,:required => true %> <%= submit_tag 'Get All Element By Attribute'%></p>
+  <p>
+    Value to search by:
+    <%= radio_button_tag 'search_value', 'name'%>
+    <%= label_tag 'Name' %>
+    <%= radio_button_tag 'search_value', 'type',true %>
+    <%= label_tag 'Type' %>
+  </p>
 <% end %>
+  <p><div id="showElementsByAttr"></div></p>
+</div>
