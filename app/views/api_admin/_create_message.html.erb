@@ -1,6 +1,9 @@
 <div class="tab-pane fade" id="list-create-message"  role="tabpanel" aria-labelledby="list-create-message-list">
-<%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'activity_create_form'}   ) do %>
+<h4> Insert a bulletin board element id</h4>
+  <%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'create_message_form'}   ) do %>
+   <p>Element ID: <%= number_field_tag 'element_id' ,nil,placeholder: 'Insert Element ID', size:10,required: true %> </p>
+   <p>Message: <%= text_field_tag 'message_body',nil,placeholder: 'Insert Message',required:true %></p>
     <%= hidden_field_tag(:request_type,'activity_action') %>
-    <p> <%= submit_tag 'Create Activity'%></p>
+    <p> <%= submit_tag 'Create Message'%></p>
   <% end %>
 </div>

@@ -19,7 +19,7 @@ class ApiAdminController < ApplicationController
       when 'element_action'
         element_actions
       when 'activity_action'
-
+        activity_actions
       end
     end
     respond_to do |format|
@@ -45,7 +45,10 @@ class ApiAdminController < ApplicationController
   end
 
   def activity_actions
-
+    case params[:commit]
+    when 'Create Message'
+      create_message
+    end
   end
 
   def edit_user
