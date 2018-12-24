@@ -53,7 +53,7 @@ module Element
 
   def get_elements_by_location
     begin
-      response = RestClient.get("localahost:8086/playground/elements/#{@user.playground}/#{@user.email}/near/#{params[:location_x]}/#{params[:location_y]}/#{params[:distance]}")
+      response = RestClient.get("localhost:8086/playground/elements/#{@user.playground}/#{@user.email}/near/#{params[:location_x]}/#{params[:location_y]}/#{params[:distance]}")
       json_array = []
       objArray = JSON.parse(response.body)
       objArray.each do |json|
@@ -63,7 +63,7 @@ module Element
     rescue RestClient::ExceptionWithResponse => e
       @message = "Error occured: Element not found"
     rescue StandardError => e
-      @message
+      @message = "#{e}"
     end
   end
 
@@ -135,7 +135,6 @@ module Element
     end
     attributes
   end
-
 
 
 end
