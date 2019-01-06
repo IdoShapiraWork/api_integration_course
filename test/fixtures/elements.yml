@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  location_x: 1.5
+  location_y: 1.5
+  expiration_date: 
+
+two:
+  name: MyString
+  type: 
+  location_x: 1.5
+  location_y: 1.5
+  expiration_date: 

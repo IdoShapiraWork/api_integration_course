@@ -7,7 +7,7 @@ module Activity
       response = RestClient.get("localhost:8086/elementEntities/#{@user.playground}&#{params[:element_id]}") # test element
       element = JSON.parse(response.body)
       if element['type'] == 'bulletinBoard' # post only if bulletin board type
-        RestClient.post("localhost:8086/playground/activities/2019a.Sapir/ido@gmail.com",
+        RestClient.post("localhost:8086/playground/activities/2019a.Sapir/#{@user.email}",
                         {
                             "type": 'PostMsg',
                             "playerEmail": @user.email,
@@ -43,9 +43,11 @@ module Activity
                             "playerPlayground": @user.playground,
                         }.to_json, content_type: :json, accept: :json)
         messages = JSON.parse(response.body)
+        puts messages
         messages['messages'].each do |row|
           hash = JSON.parse(row)
-          @view_board_messages.push("Player: #{hash['playerEmail']} Message: #{hash['attributes']['message']}")
+          puts hash
+          @view_board_messages.push("Message: #{hash['message']}")
         end
         @view_board_messages
       else
@@ -60,7 +62,11 @@ module Activity
   end
 
   def update_attendance
+    begin
+
+
     response = RestClient.get("localhost:8086/elementEntities/#{@user.playground}&#{params[:element_id]}") # test element
+    puts response.body
     element = JSON.parse(response.body)
     if element['type'] == 'attendanceSheet' # post only if attendance Sheet
       response=RestClient.post("localhost:8086/playground/activities/#{@user.playground}/#{@user.email}",
@@ -82,7 +88,9 @@ module Activity
     else
       @message = 'Element inserted is not an attendnace sheet'
     end
-
+    rescue
+      @message = 'Element not found'
+    end
   end
 
 end

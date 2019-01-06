@@ -2,9 +2,9 @@
 <h4> Insert the base X,Y and the distance between the points</h4>
 <%= form_for( :api_admin,url:'/api_admin',remote:true,html: {class: 'location_form'}   ) do %>
   <%= hidden_field_tag(:request_type,'element_action') %>
-  <p>Location X: <%= number_field_tag 'location_x',:elasticity, :step => 0.1, size:10 %>
-     Location Y: <%= number_field_tag 'location_y',:elasticity, :step => 0.1, size:10%>
-     Distance:  <%= number_field_tag 'distance',:elasticity, :step => 0.1, size:10 %></p>
+  <p>Location X: <%= number_field_tag 'location_x',:elasticity, :step => 0.1, size:10,required:true %>
+     Location Y: <%= number_field_tag 'location_y',:elasticity, :step => 0.1, size:10,required:true%>
+     Distance:  <%= number_field_tag 'distance',:elasticity, :step => 0.1, size:10, required:true%></p>
   <p><%= submit_tag 'Get Elements By Location'%></p>
 <% end %>
   <p><div id="showElementsByLocation"></div></p>

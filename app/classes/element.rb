@@ -43,6 +43,7 @@ module Element
       objArray.each do |json|
         json_array << json
       end
+      @message = 'No Element Found' if objArray.length == 0
       @attr_elements =json_array
     rescue RestClient::ExceptionWithResponse => e
       @message = "Error occured: Element not found"
@@ -56,6 +57,7 @@ module Element
       response = RestClient.get("localhost:8086/playground/elements/#{@user.playground}/#{@user.email}/near/#{params[:location_x]}/#{params[:location_y]}/#{params[:distance]}")
       json_array = []
       objArray = JSON.parse(response.body)
+      @message = 'No Element Found' if objArray.length == 0
       objArray.each do |json|
         json_array << json
       end
@@ -77,7 +79,6 @@ module Element
         @element_edit['attributes_print'] << "#{h}:#{v},"
       end
       @element_edit['attributes_print'] = @element_edit['attributes_print'][0..-2] # remove last comma
-
     rescue RestClient::ExceptionWithResponse => e
       @message = "Error occured: Element not found"
     rescue StandardError => e
@@ -90,7 +91,7 @@ module Element
     page = 0
     json_array = []
     while checker
-      response=RestClient.get("http://localhost:8086/playground/elements/#{@user.playground}/#{@user.email}/all?size=5&page=#{page}")
+      response=RestClient.get("localhost:8086/playground/elements/#{@user.playground}/#{@user.email}/all?size=5&page=#{page}")
       objArray = JSON.parse(response.body)
 
       if objArray.length == 0
@@ -117,10 +118,10 @@ module Element
           "expirationDate": params[:element_expiration_date_edit],
           "attributes": attributes,
           "creatorPlayground": @user.playground,
-          "creatorEmail": 'yaron@gmail.coms'
+          "creatorEmail": @user.email
       }.to_json,content_type: :json, accept: :json)
     rescue RestClient::ExceptionWithResponse => e
-      @message = "Error occured: Element not found"
+      @message = "Error occured: Element not found " +e.message
     rescue StandardError => e
       @message =  "Error occured #{e}"
     end

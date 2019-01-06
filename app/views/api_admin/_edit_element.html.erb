@@ -4,8 +4,8 @@
   <p><%= number_field_tag 'element_id',nil,placeholder: 'Insert Element ID', size:10,:required => true %> <%= submit_tag 'Get Element Data'%></p>
   <p><%= text_field_tag 'name_element_edit',nil,placeholder: 'Insert Element Name', size:30 %></p>
   <p>Element Type: <%= text_field_tag 'type_element_edit',nil,disabled:true  %></p>
-  <p>Location X: <%= number_field_tag 'element_location_x_edit'%></p>
-  <p>Location Y: <%= number_field_tag 'element_location_y_edit'%></p>
+  <p>Location X: <%= number_field_tag 'element_location_x_edit',:elasticity, :step => 0.1%></p>
+  <p>Location Y: <%= number_field_tag 'element_location_y_edit',:elasticity, :step => 0.1%></p>
   <p>Add attributes <%= text_field_tag 'element_attributes_edit',nil,placeholder: "name:data, name:data",size:40 %></p>
   <p>Creation Date: <%= text_field_tag 'element_create_date_edit' , nil, size:40, disabled:true %></p>
   <p>Creator Email: <%= text_field_tag 'element_create_email_edit' , nil, size:40, disabled:true %></p>

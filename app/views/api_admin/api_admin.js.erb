@@ -4,9 +4,9 @@ function getData(){
     divContainer.innerHTML ="<b><%= @message %></b>";
 
     // Remove message after 3 seconds
-    setInterval(function() {
+/*    setInterval(function() {
         divContainer.innerHTML="";
-    }, 3 * 1000);
+    }, 3 * 1000);*/
 }
 
 function getAttributesElementsData(){
@@ -39,7 +39,8 @@ function getLocationElementsData(){
 
 function insertDataToElementEdit(){
     var divContainer = document.getElementById("element_id");
-    if(divContainer.value != ''){
+    if(divContainer.value == ''){
+        console.log("im here");
         divContainer = document.getElementById("name_element_edit");
         divContainer.value = "<%= @element_edit['name'] %>";
         divContainer = document.getElementById("element_location_x_edit");
